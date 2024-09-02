@@ -115,10 +115,17 @@ function changeDirection(event) {
 document.addEventListener('keydown', changeDirection);
 food = getRandomFoodPosition();
 
+
 function startGame() {
     overlay.style.display = 'none';
+    startScreen.style.display = 'none'; // 隐藏开始屏幕
     gameInterval = setInterval(gameLoop, 100);
 }
+
+overlay.addEventListener('click', startGame);
+canvas.addEventListener('click', startGame);
+
+// ... existing code ...
 
 canvas.addEventListener('click', startGame);
 

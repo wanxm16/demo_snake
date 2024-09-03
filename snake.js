@@ -21,10 +21,14 @@ highScoreElement.textContent = `High Score: ${highScore}`;
 let gameInterval;
 
 function getRandomFoodPosition() {
-    return {
-        x: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize,
-        y: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize
-    };
+    let position;
+    do {
+        position = {
+            x: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize,
+            y: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize
+        };
+    } while (snake.some(segment => segment.x === position.x && segment.y === position.y));
+    return position;
 }
 
 function drawRect(x, y, color) {
@@ -115,7 +119,6 @@ function changeDirection(event) {
 document.addEventListener('keydown', changeDirection);
 food = getRandomFoodPosition();
 
-
 function startGame() {
     overlay.style.display = 'none';
     startScreen.style.display = 'none'; // 隐藏开始屏幕
@@ -123,10 +126,6 @@ function startGame() {
 }
 
 overlay.addEventListener('click', startGame);
-canvas.addEventListener('click', startGame);
-
-// ... existing code ...
-
 canvas.addEventListener('click', startGame);
 
 window.addEventListener('resize', () => {

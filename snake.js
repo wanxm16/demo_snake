@@ -12,7 +12,7 @@ let canvasSize = Math.min(window.innerWidth, window.innerHeight) - 20;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
 
-const snake = [{ x: canvasSize / 2, y: canvasSize / 2 }];
+const snake = [{ x: Math.floor(canvasSize / 2 / gridSize) * gridSize, y: Math.floor(canvasSize / 2 / gridSize) * gridSize }];
 let direction = { x: 0, y: 0 };
 let food = { x: 0, y: 0 };
 let score = 0;
@@ -140,7 +140,7 @@ window.addEventListener('resize', () => {
     gridSize = Math.floor(canvasSize / 30);
     food = getRandomFoodPosition();
     snake.length = 1;
-    snake[0] = { x: canvasSize / 2, y: canvasSize / 2 };
+    snake[0] = { x: Math.floor(canvasSize / 2 / gridSize) * gridSize, y: Math.floor(canvasSize / 2 / gridSize) * gridSize };
     direction = { x: 0, y: 0 };
 });
 
@@ -193,7 +193,7 @@ function restartGame() {
     scoreElement.textContent = `Score: ${score}`;
     direction = { x: 0, y: 0 };
     snake.length = 1;
-    snake[0] = { x: canvasSize / 2, y: canvasSize / 2 };
+    snake[0] = { x: Math.floor(canvasSize / 2 / gridSize) * gridSize, y: Math.floor(canvasSize / 2 / gridSize) * gridSize };
     food = getRandomFoodPosition();
     gameInterval = setInterval(gameLoop, 100);
     canvas.removeEventListener('click', restartGame);

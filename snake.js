@@ -28,6 +28,7 @@ function getRandomFoodPosition() {
             y: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize
         };
     } while (snake.some(segment => segment.x === position.x && segment.y === position.y));
+    console.log('New food position:', position); // Log food position
     return position;
 }
 
@@ -48,7 +49,11 @@ function updateSnake() {
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
     snake.unshift(head);
 
+    console.log('Snake head position:', head); // Log snake head position
+    console.log('Food position:', food); // Log food position
+
     if (head.x === food.x && head.y === food.y) {
+        console.log('Food eaten'); // Log when food is eaten
         score++;
         scoreElement.textContent = `Score: ${score}`;
         food = getRandomFoodPosition();

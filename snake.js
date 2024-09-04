@@ -78,15 +78,7 @@ function checkCollision() {
 
 function gameLoop() {
     if (checkCollision()) {
-        clearInterval(gameInterval);
-        scoreDisplay.textContent = score;
-        gameOverMessage.style.display = 'block';
-        canvas.addEventListener('click', restartGame);
-        if (score > highScore) {
-            highScore = score;
-            localStorage.setItem('highScore', highScore);
-            highScoreElement.textContent = `High Score: ${highScore}`;
-        }
+        endGame();
         return;
     }
 
@@ -102,6 +94,7 @@ function changeDirection(event) {
     const UP = 38;
     const RIGHT = 39;
     const DOWN = 40;
+    const ESC = 27;
 
     const goingUp = direction.y === -gridSize;
     const goingDown = direction.y === gridSize;
@@ -119,6 +112,21 @@ function changeDirection(event) {
     }
     if (keyPressed === DOWN && !goingUp) {
         direction = { x: 0, y: gridSize };
+    }
+    if (keyPressed === ESC) {
+        endGame();
+    }
+}
+
+function endGame() {
+    clearInterval(gameInterval);
+    scoreDisplay.textContent = score;
+    gameOverMessage.style.display = 'block';
+    canvas.addEventListener('click', restartGame);
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+        highScoreElement.textContent = `High Score: ${highScore}`;
     }
 }
 

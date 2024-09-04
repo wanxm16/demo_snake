@@ -22,10 +22,11 @@ let gameInterval;
 
 function getRandomFoodPosition() {
     let position;
+    const margin = 1; // Margin to avoid placing food on the edge
     do {
         position = {
-            x: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize,
-            y: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize
+            x: (Math.floor(Math.random() * ((canvasSize / gridSize) - 2 * margin)) + margin) * gridSize,
+            y: (Math.floor(Math.random() * ((canvasSize / gridSize) - 2 * margin)) + margin) * gridSize
         };
     } while (snake.some(segment => segment.x === position.x && segment.y === position.y));
     console.log('New food position:', position); // Log food position
